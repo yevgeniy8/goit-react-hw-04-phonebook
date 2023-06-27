@@ -14,15 +14,13 @@ const contactArray = [
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-const storage = () => {
-    return JSON.parse(localStorage.getItem('contacts'));
-};
-
 export const App = () => {
-    const [contacts, setContacts] = useState(storage ?? contactArray);
+    const [contacts, setContacts] = useState(
+        () => JSON.parse(localStorage.getItem('contacts')) ?? contactArray
+    );
     const [filter, setFilter] = useState('');
 
-    useEffect(() => {
+	useEffect(() => {
         localStorage.setItem('contacts', JSON.stringify(contacts));
     }, [contacts]);
 
